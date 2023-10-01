@@ -11,8 +11,8 @@ class Block {
     constructor(xAxis, yAxis) { 
         this.bottomLeft = [xAxis, yAxis]
         this.bottomRight = [xAxis + blockWidth, yAxis]
-        this.topLeft = [xAxis, yAxis + blockHeight]
         this.topRight = [xAxis + blockWidth, yAxis + blockHeight]
+        this.topLeft = [xAxis, yAxis + blockHeight]
     }
 }
 
@@ -46,6 +46,7 @@ function addBlocks() {
   block.style.left = blocks[i].bottomLeft[0] + 'px'
   block.style.bottom = blocks[i].bottomLeft[1] + 'px'
   grid.appendChild(block)
+  console.log(blocks[i].bottomLeft)
   }
 }
 addBlocks()
@@ -54,27 +55,28 @@ addBlocks()
 //add user 
 const user = document.createElement('div')
 user.classList.add('user')
-drawUser() 
 grid.appendChild(user)
+drawUser() 
+
 
 //draw user 
 function drawUser() { 
-    user.style.left = currentPostion[0] + 'px'
-    user.style.bottom = currentPostion[1] + 'px'
+    user.style.left = currentPosition[0] + 'px'
+    user.style.bottom = currentPosition[1] + 'px'
 }
 
 //move user
 function moveUser(e) { 
     switch(e.key) { 
     case 'ArrowLeft': 
-        if (currentPostion[0] > 0) {
+        if (currentPosition[0] > 0) {
         currentPosition[0] -= 10 
         drawUser()
         }
         break;
     
     case 'ArrowRight': 
-       if (currentPosition[0] < blockWidth) { 
+       if (currentPosition[0] < blockWidth - blockWidth) { 
         currentPosition[0] +=10
         drawUser()
        }
@@ -84,3 +86,8 @@ function moveUser(e) {
 }
 
 document.addEventListener('keydown', moveUser)
+
+// add ball 
+const ball = document.createElement('div')
+ball.classList.add('ball')
+grid.appendChild(ball)
