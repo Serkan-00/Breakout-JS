@@ -76,7 +76,7 @@ function moveUser(e) {
         break;
     
     case 'ArrowRight': 
-       if (currentPosition[0] < blockWidth - blockWidth) { 
+       if (currentPosition[0] < (boardWidth - blockWidth)) { 
         currentPosition[0] +=10
         drawUser()
        }
