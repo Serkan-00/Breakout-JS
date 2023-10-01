@@ -2,6 +2,7 @@ const grid = document.querySelector('.grid')
 const blockWidth = 100
 const blockHeight = 20 
 const boardWidth = 560
+let timerId 
 
 const userStart = [230, 10]
 let currentPosition = userStart
@@ -100,3 +101,13 @@ const ball = document.createElement('div')
 ball.classList.add('ball')
 drawBall()
 grid.appendChild(ball)
+
+// move ball 
+function moveBall() { 
+    ballCurrentPosition[0] += 2
+    ballCurrentPosition[1] += 2 
+    drawBall()
+
+}
+
+timerId = setInterval(moveBall, 30)
