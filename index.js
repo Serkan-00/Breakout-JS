@@ -131,6 +131,13 @@ function checkForCollisions() {
             blocks.splice(i, 1)
             score++ 
             scoreDisplay.innerHTML = score 
+
+            //check for win 
+            if(blocks.length === 0) {
+                scoreDisplay.innerHTML = 'You win'
+                clearInterval(timerId)
+                document.removeEventListener('keydown', moveUser)
+            }
          }
     }
 
