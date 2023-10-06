@@ -5,16 +5,18 @@ const blockHeight = 20
 const ballDiameter = 20 
 const boardWidth = 560
 const boardHeight = 300 
-let timerId 
 let xDirection = -2 
 let yDirection = 2 
-let score = 0 
+
 
 const userStart = [230, 10]
 let currentPosition = userStart
 
 const ballStart = [270, 40]
 let ballCurrentPosition = ballStart
+
+let timerId 
+let score = 0 
 
 //create Block
 class Block { 
@@ -69,16 +71,11 @@ grid.appendChild(user)
 drawUser() 
 
 
-//draw the user 
-function drawUser() { 
-    user.style.left = currentPosition[0] + 'px'
-    user.style.bottom = currentPosition[1] + 'px'
-}
-//draw the ball 
-function drawBall() { 
-    ball.style.left = ballCurrentPosition[0] + 'px'
-    ball.style.bottom = ballCurrentPosition[1] + 'px'
-}
+// add ball 
+const ball = document.createElement('div')
+ball.classList.add('ball')
+drawBall()
+grid.appendChild(ball)
 
 //move user
 function moveUser(e) { 
@@ -99,14 +96,20 @@ function moveUser(e) {
     }
     
 }
-
 document.addEventListener('keydown', moveUser)
 
-// add ball 
-const ball = document.createElement('div')
-ball.classList.add('ball')
-drawBall()
-grid.appendChild(ball)
+
+//draw the user 
+function drawUser() { 
+    user.style.left = currentPosition[0] + 'px'
+    user.style.bottom = currentPosition[1] + 'px'
+}
+//draw the ball 
+function drawBall() { 
+    ball.style.left = ballCurrentPosition[0] + 'px'
+    ball.style.bottom = ballCurrentPosition[1] + 'px'
+}
+
 
 // move ball 
 function moveBall() { 
@@ -116,7 +119,7 @@ function moveBall() {
     checkForCollisions() 
 }
 
-timerId = setInterval(moveBall, 30)
+timerId = setInterval(moveBall, 15)
 
 //check for collisions 
 function checkForCollisions() { 
@@ -128,7 +131,8 @@ function checkForCollisions() {
          ) {
             const allBlocks = Array.from(document.querySelectorAll('.block'))
             allBlocks[i].classList.remove('block')
-            blocks.splice(i, 1)
+            blocks.splice(i,1)
+            changeDirection()
             score++ 
             scoreDisplay.innerHTML = score 
 
